@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiExternalLink, FiGithub, FiX, FiChevronLeft, FiChevronRight, FiFilter, FiSearch } from 'react-icons/fi';
 import useScrollReveal from '../../hooks/useScrollReveal';
@@ -695,7 +695,6 @@ const FilterTag = ({ tag, isActive, onClick }) => {
 };
 
 const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeTags, setActiveTags] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
@@ -706,36 +705,35 @@ const Projects = () => {
   // Get unique tags from all projects
   const allTags = [...new Set(projects.flatMap(project => project.tags))].sort();
   
-  // Filter projects based on activeFilter, activeTags, and search query
-  const filteredProjects = projects
-    .filter(project => {
-      // Main category filter
-      if (activeFilter === 'featured' && !project.featured) {
+  // Filter projects based on activeTags and search query
+  const filteredProjects = projects.filter(project => {
+    // If no filters are active, show all projects
+    if (activeTags.length === 0 && !searchQuery) {
+      return true;
+    }
+    
+    // Tag filters
+    if (activeTags.length > 0) {
+      const hasAllTags = activeTags.every(tag => 
+        project.tags.includes(tag)
+      );
+      if (!hasAllTags) return false;
+    }
+    
+    // Search query
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      const inTitle = project.title.toLowerCase().includes(query);
+      const inDescription = project.description.toLowerCase().includes(query);
+      const inTags = project.tags.some(tag => tag.toLowerCase().includes(query));
+      
+      if (!inTitle && !inDescription && !inTags) {
         return false;
       }
-      
-      // Tag filters
-      if (activeTags.length > 0) {
-        const hasAllTags = activeTags.every(tag => 
-          project.tags.includes(tag)
-        );
-        if (!hasAllTags) return false;
-      }
-      
-      // Search query
-      if (searchQuery) {
-        const query = searchQuery.toLowerCase();
-        const inTitle = project.title.toLowerCase().includes(query);
-        const inDescription = project.description.toLowerCase().includes(query);
-        const inTags = project.tags.some(tag => tag.toLowerCase().includes(query));
-        
-        if (!inTitle && !inDescription && !inTags) {
-          return false;
-        }
-      }
-      
-      return true;
-    });
+    }
+    
+    return true;
+  });
   
   // Toggle tag selection
   const toggleTag = (tag) => {
@@ -750,8 +748,24 @@ const Projects = () => {
   const clearFilters = () => {
     setActiveTags([]);
     setSearchQuery('');
+    setShowFilters(false);
   };
-  
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Handle filter button click
+  const handleFilterClick = () => {
+    setShowFilters(prev => !prev);
+  };
+
+  // Handle all projects click
+  const handleAllProjectsClick = () => {
+    clearFilters();
+  };
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -845,7 +859,7 @@ const Projects = () => {
               marginRight: '1rem'
             }}>
               <motion.button
-                onClick={() => setActiveFilter('all')}
+                onClick={handleAllProjectsClick}
                 style={{ 
                   paddingBottom: '0.5rem', 
                   paddingLeft: '0.5rem', 
@@ -854,39 +868,20 @@ const Projects = () => {
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  color: activeFilter === 'all' ? 'var(--color-primary)' : 'var(--color-text-primary)'
+                  color: 'var(--color-primary)'
                 }}
                 variants={filterVariants}
-                animate={activeFilter === 'all' ? 'active' : 'inactive'}
+                animate="active"
                 whileHover="hover"
               >
                 All Projects
-              </motion.button>
-              
-              <motion.button
-                onClick={() => setActiveFilter('featured')}
-                style={{ 
-                  paddingBottom: '0.5rem', 
-                  paddingLeft: '0.5rem', 
-                  paddingRight: '0.5rem', 
-                  fontWeight: '500',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  color: activeFilter === 'featured' ? 'var(--color-primary)' : 'var(--color-text-primary)'
-                }}
-                variants={filterVariants}
-                animate={activeFilter === 'featured' ? 'active' : 'inactive'}
-                whileHover="hover"
-              >
-                Featured
               </motion.button>
             </div>
             
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setShowFilters(!showFilters)}
+              onClick={handleFilterClick}
               style={{
                 padding: '0.5rem 1rem',
                 borderRadius: '2rem',
@@ -913,7 +908,7 @@ const Projects = () => {
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
                 placeholder="Search projects..."
                 style={{
                   width: '100%',

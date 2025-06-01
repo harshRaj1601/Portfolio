@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { FiCode, FiLayout, FiServer, FiTool, FiBarChart2, FiDatabase } from 'react-icons/fi';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import harsh1 from '../../assets/harsh1.jpg';
+import harsh2 from '../../assets/harsh2.jpg';
 
 const About = () => {
   const { ref: aboutRef, controls: aboutControls } = useScrollReveal();
@@ -54,7 +56,7 @@ const About = () => {
       icon: <FiDatabase size={32} />,
       title: "AI & Machine Learning",
       description: "Developing and implementing advanced AI and machine learning models for predictive analytics and automation.",
-      items: ["TensorFlow", "PyTorch", "Scikit-learn", "Deep Learning", "Neural Networks", "Computer Vision", "Natural Language Processing"]
+      items: ["TensorFlow", "PyTorch", "Scikit-learn", "Deep Learning", "Neural Networks", "Computer Vision"]
     },
     {
       icon: <FiBarChart2 size={32} />,
@@ -99,18 +101,13 @@ const About = () => {
             >
               <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>Who am I?</h3>
               <motion.p variants={textVariants} style={{ marginBottom: '1rem' }}>
-                Hi! I'm Harsh Jaiswal, a Python programmer and machine learning specialist from Gurugram. I have a strong 
-                foundation in developing AI/ML solutions and automation tools with a focus on solving complex problems efficiently.
+                Hi! I'm Harsh Jaiswal, a Python programmer and aspiring machine learning engineer from Gurugram. I specialize in building AI/ML solutions and automation tools, with a focus on solving real-world problems efficiently.
               </motion.p>
               <motion.p variants={textVariants} style={{ marginBottom: '1rem' }}>
-                I recently completed my Bachelor of Computer Applications (BCA) from University of Lucknow (2021-2024) and am currently
-                working as a Machine Learning Intern at Digipodium in Lucknow, where I develop machine learning models, build deep learning
-                architectures, and integrate trained models into web applications using Flask.
+                I recently completed my Bachelor of Computer Applications (BCA) from the University of Lucknow (2021–2024). I also completed a Machine Learning Internship at Digipodium in Lucknow, where I developed machine learning models, built deep learning architectures, and integrated trained models into web applications using Flask.
               </motion.p>
               <motion.p variants={textVariants}>
-                Beyond programming, I'm passionate about advancing AI capabilities and creating practical applications 
-                for machine learning. I've developed numerous projects in computer vision, voice cloning, and automated tools 
-                that demonstrate my commitment to innovation and problem-solving in the field of artificial intelligence.
+                I'm passionate about the potential of artificial intelligence and enjoy applying machine learning to practical challenges. My projects include work in computer vision, voice cloning, and automation tools, reflecting my drive to innovate and grow in the AI/ML domain.
               </motion.p>
             </motion.div>
             
@@ -128,8 +125,8 @@ const About = () => {
                 border: '1px solid rgba(75, 85, 99, 0.5)'
               }}>
                 <img 
-                  src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" 
-                  alt="Developer working" 
+                  src={harsh1}
+                  alt="Harsh Jaiswal" 
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>

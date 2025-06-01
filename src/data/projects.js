@@ -4,16 +4,16 @@ const projects = [
     "title": "NN Builder",
     "description": "A web-based application for building, training, and deploying neural networks with a user-friendly interface. This tool allows users to easily create, customize, and train neural networks for both classification and regression tasks.",
     "longDescription": "NN Builder is a web application that enables users to visually design, train, and test neural network architectures without writing code. It supports dataset uploads, provides AI-powered architecture suggestions, and offers real-time training monitoring. The project aims to make deep learning more accessible to beginners while providing powerful features for experienced users.",
-    "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+    "image": "/src/assets/nnbuilder1.png",
     "gallery": [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1581472723648-909f4851d4ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80"
+      // "src/assets/nnbuilder1.png",
+      "src/assets/nnbuilder2.png",
+      "src/assets/nnbuilder3.png",
     ],
     "tags": ["Python", "Flask", "Neural Networks", "Machine Learning", "Web Development", "Deep Learning", "Tensorflow", "Automation"],
     "featured": true,
-    "demoLink": "https://nn-builder.com",
-    "codeLink": "https://github.com/harshraj1601/NN-Builder",
+    "demoLink": "",
+    "codeLink": "https://github.com/harshRaj1601/NN-Builder",
     "features": [
       "Interactive Model Building: Visually design neural network architectures",
       "Dataset Handling: Upload and preprocess CSV datasets automatically",
@@ -27,10 +27,10 @@ const projects = [
     title: "FlaskForge",
     description: "A CLI-based Flask setup tool that automates the creation of Flask directories with basic code and additional features, streamlining the development process.",
     longDescription: "FlaskForge is a command-line tool designed to accelerate Flask application development by automating the project setup process. It generates a well-structured Flask application with configurable features like authentication, database integration, and API endpoints based on user preferences.",
-    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    image: "src/assets/flaskforge.png",
     tags: ["Python", "Flask", "CLI", "Automation", "Web Development","Machine Learning"],
     featured: true,
-    codeLink: "https://github.com/harshraj1601/flaskforge",
+    codeLink: "https://github.com/harshRaj1601/flaskforge",
     features: [
       "Interactive CLI wizard for customizing project structure according to user preferences",
       "Library Installation and Suggetions according to user preferences",
@@ -45,15 +45,10 @@ const projects = [
     title: "ClothSize Measurement Tool",
     description: "A Computer Vision project, can measure and predict cloth size of the person",
     longDescription: "ClothSize is an innovative solution that uses computer vision and machine learning to extract precise body measurements from images. This technology helps online shoppers find the right clothing size, reducing returns and improving customer satisfaction in e-commerce.",
-    image: "https://images.unsplash.com/photo-1561069934-eee225952461?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
-      "https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
-      "https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    ],
+    image: "src/assets/fitcam.png",
     tags: ["Python", "Computer Vision", "Image Processing", "TensorFlow", "OpenCV", "MediaPipe", "Mathematics"],
     featured: true,
-    codeLink: "https://github.com/harshraj1601/clothmess",
+    codeLink: "https://github.com/harshRaj1601/clothmess",
     features: [
       "Real-time body measurements using webcam",
       "Option to upload photos for measurements",
@@ -66,10 +61,10 @@ const projects = [
     id: 4,
     title: "AutoPylot",
     description: "A library that automatically installs all imported libraries in a Python file or an entire project directory, streamlining dependency management.",
-    image: "https://images.unsplash.com/photo-1555949966-8c045d9f886a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    image: "src/assets/autopylot.png",
     tags: ["Python", "Automation", "Package Management", "Developer Tools"],
     featured: false,
-    codeLink: "https://github.com/harshraj1601/autopylot",
+    codeLink: "https://github.com/harshRaj1601/autopylot",
     features: [
       "Automatic detection of imports in Python files",
       "Smart version resolution to avoid conflicts",
@@ -83,19 +78,15 @@ const projects = [
     title: "VoiceCL",
     description: "A voice cloning tool that generates audio for input text in any person's voice using advanced machine learning techniques.",
     longDescription: "VoiceCL is a state-of-the-art voice cloning system that uses deep learning to synthesize natural-sounding speech that mimics a target speaker's voice. With just a short audio sample, the system can generate unlimited new speech in the same voice, enabling applications in accessibility, content creation, and personalized user experiences.",
-    image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
-      "https://images.unsplash.com/photo-1465225314224-587cd83d322b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-    ],
+    image: "src/assets/voicecl.png",
     tags: ["Python", "Machine Learning", "Voice Synthesis", "Audio Processing", "PyTorch"],
     featured: true,
-    codeLink: "https://github.com/harshraj1601/voicecl",
+    codeLink: "",
     features: [
       "High-quality voice cloning from just 10 seconds of reference audio",
       "Emotional tone and emphasis control",
       "Multi-language support with accent preservation",
-      "Real-time voice conversion API",
+      "Indian Language Support",
       "Privacy-focused with on-device processing options"
     ],
   },
@@ -106,13 +97,13 @@ const projects = [
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     tags: ["Python", "Computer Vision", "Security", "Email Integration", "OpenCV"],
     featured: false,
-    demoLink: "https://survion.com",
-    codeLink: "https://github.com/harshraj1601/survion",
+    demoLink: "",
+    codeLink: "",
     features: [
       "Real-time motion and activity detection",
       "Person identification with facial recognition",
-      "Suspicious behavior pattern recognition",
-      "Instant alerts via email, SMS, or push notifications",
+      "Instant alerts via email and push notifications",
+      "Person Identification message via email and push notifications",
       "Video recording with cloud storage integration"
     ]
   },
@@ -127,8 +118,10 @@ const projects = [
     codeLink: "https://github.com/harshraj1601/poseguard",
     features: [
       "Real-time driver pose estimation",
-      "Distraction and drowsiness detection",
+      "Distraction detection",
       "Custom alert thresholds and sensitivity settings",
+      "Beep sound alert",
+      "Email alert with photo to vehicle owner",
       "Dashboard with driving behavior analytics",
       "Integration with vehicle telematics systems"
     ]
@@ -146,25 +139,15 @@ const projects = [
     ],
     tags: ["Python", "Medical Imaging", "Image Segmentation", "Deep Learning", "Healthcare"],
     featured: true,
-    demoLink: "https://retinal-segmentation.com",
-    codeLink: "https://github.com/harshraj1601/retinal-segmentation",
+    demoLink: "",
+    codeLink: "",
     features: [
       "Automated segmentation of retinal structures (vessels, optic disc, macula)",
-      "Detection of abnormalities indicative of diseases like diabetic retinopathy",
+      "Detection of abnormalities indicative of diseases like diabetic retinopathy, glaucoma, and macular degeneration",
       "Quantitative analysis of disease progression",
       "Integration with hospital information systems",
-      "HIPAA-compliant data handling and privacy protection"
+      "Mask Generation using UNET model"
     ],
-    additionalLinks: [
-      {
-        title: "Clinical Study Results",
-        url: "https://retinal-segmentation.com/study"
-      },
-      {
-        title: "Dataset Information",
-        url: "https://retinal-segmentation.com/dataset"
-      }
-    ]
   }
 ];
 

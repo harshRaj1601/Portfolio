@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowDown, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
+import harsh from '../../assets/harsh.jpg';
 
 const Home = () => {
   // Animation variants
@@ -78,7 +79,7 @@ const Home = () => {
             
             <motion.div variants={itemVariants}>
               <h2 style={{ fontSize: '1.75rem', marginBottom: '1.5rem' }}>
-                Python Developer & Machine Learning Specialist
+              Machine Learning & AI Enthusiast | Python Developer
               </h2>
             </motion.div>
             
@@ -108,7 +109,7 @@ const Home = () => {
               animate="visible"
             >
               <motion.a 
-                href="https://github.com/harshraj1601" 
+                href="https://github.com/harshRaj1601" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 variants={iconVariants}
@@ -119,7 +120,7 @@ const Home = () => {
               </motion.a>
               
               <motion.a 
-                href="https://linkedin.com/in/harshraj1601" 
+                href="https://linkedin.com/in/harshRaj1601" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 variants={iconVariants}
@@ -129,16 +130,6 @@ const Home = () => {
                 <FiLinkedin size={24} />
               </motion.a>
               
-              <motion.a 
-                href="https://twitter.com/harshrajjaiswal" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                variants={iconVariants}
-                whileHover="hover"
-                aria-label="Twitter"
-              >
-                <FiTwitter size={24} />
-              </motion.a>
             </motion.div>
           </motion.div>
           
@@ -159,9 +150,16 @@ const Home = () => {
               border: '1px solid rgba(75, 85, 99, 0.5)'
             }}>
               <img 
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80" 
-                alt="Developer" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                src={harsh} 
+                alt="Harsh Jaiswal" 
+                style={{
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover',
+                  transform: 'scale(2.5)',           // Zoom in (adjust as needed)
+                  transformOrigin: '46% 7%',        // Zoom from face (adjust % to align with face)
+                  transition: 'transform 0.3s ease'  // Optional: smooth zoom transition
+                }}
               />
             </div>
           </motion.div>

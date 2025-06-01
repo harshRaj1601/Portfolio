@@ -189,7 +189,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 style={{ fontWeight: '600', marginBottom: '0.25rem' }}>Email</h4>
-                    <p style={{ color: 'var(--color-text-secondary)' }}>harshrajjaiswal16012003@gmail.com</p>
+                    <p href="mailto:harshrajjaiswal16012003@gmail.com" style={{ color: 'var(--color-text-secondary)' }}>harshrajjaiswal16012003@gmail.com</p>
                   </div>
                 </motion.div>
                 
@@ -217,7 +217,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 style={{ fontWeight: '600', marginBottom: '0.25rem' }}>Phone</h4>
-                    <p style={{ color: 'var(--color-text-secondary)' }}>+91 7007872946</p>
+                    <p style={{ color: 'var(--color-text-secondary)' }}>+91 7754938393</p>
                   </div>
                 </motion.div>
                 
@@ -245,7 +245,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 style={{ fontWeight: '600', marginBottom: '0.25rem' }}>Location</h4>
-                    <p style={{ color: 'var(--color-text-secondary)' }}>Gurugram, Haryana, India</p>
+                    <p style={{ color: 'var(--color-text-secondary)' }}>Gurugram, India</p>
                   </div>
                 </motion.div>
                 
