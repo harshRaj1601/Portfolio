@@ -67,7 +67,7 @@ const Footer = () => {
             <h4 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem' }}>Connect</h4>
             <div style={{ display: 'flex', gap: '1rem' }}>
               <motion.a 
-                href="https://github.com" 
+                href="https://github.com/harshRaj1601" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 variants={socialLinkVariants}
@@ -78,7 +78,7 @@ const Footer = () => {
                 <FiGithub size={20} />
               </motion.a>
               <motion.a 
-                href="https://linkedin.com" 
+                href="https://linkedin.com/in/harshRaj1601" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 variants={socialLinkVariants}
@@ -89,18 +89,7 @@ const Footer = () => {
                 <FiLinkedin size={20} />
               </motion.a>
               <motion.a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                variants={socialLinkVariants}
-                whileHover="hover"
-                aria-label="Twitter"
-                style={{ color: 'var(--color-text-secondary)' }}
-              >
-                <FiTwitter size={20} />
-              </motion.a>
-              <motion.a 
-                href="mailto:your-email@example.com"
+                href="mailto:harshrajjaiswal16012003@gmail.com"
                 variants={socialLinkVariants}
                 whileHover="hover"
                 aria-label="Email"

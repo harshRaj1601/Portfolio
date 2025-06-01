@@ -1,0 +1,132 @@
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.floating-text {  position: absolute;
+  color: currentColor;
+  opacity: 0.05;
+  font-size: 2rem;
+  font-weight: 600;
+  white-space: nowrap;
+  animation: float infinite;
+  animation-timing-function: ease-in-out;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform, opacity;
+  transform-origin: center center;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.floating-text.cursor-moving {
+  animation-play-state: paused;
+  transform: translate(
+    calc(var(--effect-strength) * var(--displacement-x) * 0.8),
+    calc(var(--effect-strength) * var(--displacement-y) * 0.8)
+  ) 
+  rotate(calc(var(--effect-strength) * 12deg))
+  scale(calc(1 + var(--effect-strength) * 0.4));
+  opacity: calc(0.08 + var(--effect-strength) * 0.15);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Enhanced pattern-specific animations */
+.floating-text.circle.cursor-moving {
+  transform: translate(
+    calc(var(--effect-strength) * var(--displacement-x) * 1),
+    calc(var(--effect-strength) * var(--displacement-y) * 1)
+  ) 
+  rotate(calc(var(--effect-strength) * 35deg))
+  scale(calc(1 + var(--effect-strength) * 0.5));
+  opacity: calc(0.08 + var(--effect-strength) * 0.2);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.floating-text.diamond.cursor-moving {
+  transform: translate(
+    calc(var(--effect-strength) * var(--displacement-x) * 1.2),
+    calc(var(--effect-strength) * var(--displacement-y) * 1.2)
+  ) 
+  rotate(calc(var(--effect-strength) * -30deg))
+  scale(calc(1 + var(--effect-strength) * 0.6));
+  opacity: calc(0.08 + var(--effect-strength) * 0.25);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.floating-text.triangle.cursor-moving {
+  transform: translate(
+    calc(var(--effect-strength) * var(--displacement-x) * 1.4),
+    calc(var(--effect-strength) * var(--displacement-y) * 1.4)
+  ) 
+  rotate(calc(var(--effect-strength) * 25deg))
+  scale(calc(1 + var(--effect-strength) * 0.7));
+  opacity: calc(0.08 + var(--effect-strength) * 0.3);
+}
+/* Pattern-specific styles */
+.floating-text.circle {
+  animation-name: floatCircle;
+}
+
+.floating-text.diamond {
+  animation-name: floatDiamond;
+}
+
+.floating-text.triangle {
+  animation-name: floatTriangle;
+}
+
+@keyframes floatCircle {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(100px, 100px) rotate(90deg);
+  }
+  50% {
+    transform: translate(0, 200px) rotate(180deg);
+  }
+  75% {
+    transform: translate(-100px, 100px) rotate(270deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
+
+@keyframes floatDiamond {
+  0% {
+    transform: translate(0, 0) rotate(45deg);
+  }
+  25% {
+    transform: translate(150px, -150px) rotate(135deg);
+  }
+  50% {
+    transform: translate(0, -300px) rotate(225deg);
+  }
+  75% {
+    transform: translate(-150px, -150px) rotate(315deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(405deg);
+  }
+}
+
+@keyframes floatTriangle {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(200px, -100px) scale(0.8);
+  }
+  66% {
+    transform: translate(-200px, -100px) scale(1.2);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}

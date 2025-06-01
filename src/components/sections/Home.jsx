@@ -1,7 +1,8 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowDown, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
 import harsh from '../../assets/harsh.jpg';
+import './HeroImage.css';
 
 const Home = () => {
   // Animation variants
@@ -138,27 +139,42 @@ const Home = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.8, type: 'spring' }}
             style={{ textAlign: 'center' }}
-          >
-            <div style={{ 
-              width: '350px', 
-              height: '350px', 
-              margin: '0 auto',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              backgroundColor: 'rgba(30, 41, 59, 0.7)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(75, 85, 99, 0.5)'
-            }}>
+          >            <div 
+              className="hero-image-container"
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.classList.add('hover-active');
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.classList.remove('hover-active');
+                e.currentTarget.style.setProperty('--mouse-x', '50%');
+                e.currentTarget.style.setProperty('--mouse-y', '50%');
+              }}
+              style={{ 
+                width: '350px', 
+                height: '350px', 
+                margin: '0 auto',
+                backgroundColor: 'rgba(30, 41, 59, 0.7)',
+                backdropFilter: 'blur(10px)',
+                border: '2px solid rgba(99, 102, 241, 0.3)',
+                boxShadow: '0 15px 50px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(99, 102, 241, 0.1)'
+              }}>
               <img 
                 src={harsh} 
                 alt="Harsh Jaiswal" 
+                className="hero-image"
                 style={{
                   width: '100%', 
                   height: '100%', 
                   objectFit: 'cover',
-                  transform: 'scale(2.5)',           // Zoom in (adjust as needed)
-                  transformOrigin: '46% 7%',        // Zoom from face (adjust % to align with face)
-                  transition: 'transform 0.3s ease'  // Optional: smooth zoom transition
+                  transform: 'scale(2.5)',
+                  transformOrigin: '46% 7%',
                 }}
               />
             </div>

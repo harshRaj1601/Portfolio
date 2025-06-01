@@ -8,6 +8,7 @@ import logoImage from '../../assets/logow.png';
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const location = useLocation();
 
@@ -23,6 +24,19 @@ const Header = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Close mobile menu when location changes
@@ -55,14 +69,26 @@ const Header = () => {
   return (
     <header style={{ 
       boxShadow: scrolled ? '0 4px 6px rgba(0, 0, 0, 0.1)' : 'none',
-      padding: scrolled ? '0.75rem 0' : '1.5rem 0'
+      padding: scrolled ? '0.75rem 0' : '1.5rem 0',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: 'var(--color-background)',
+      zIndex: 1000,
     }}>
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="container" style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        padding: '0 1rem'
+      }}>
         <Link to="/" style={{ 
           fontSize: '1.5rem', 
           fontWeight: 'bold',
           display: 'flex',
-          alignItems: 'center'
+          alignItems: 'center',
+          zIndex: 1001
         }}>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -81,7 +107,9 @@ const Header = () => {
           </motion.div>
         </Link>
         
-        <nav style={{ display: mobileMenuOpen ? 'none' : 'block' }}>
+        <nav style={{ 
+          display: isMobile ? 'none' : 'block'
+        }}>
           <ul style={{ display: 'flex', gap: '2rem' }}>
             {navigationLinks.map((link, i) => (
               <motion.li
@@ -124,18 +152,16 @@ const Header = () => {
           </ul>
         </nav>
         
-        {/* Mobile menu button */}
         <button 
           style={{ 
-            display: 'none', 
+            display: isMobile ? 'block' : 'none',
             background: 'none', 
             border: 'none',
             color: 'var(--color-text-primary)',
             cursor: 'pointer',
             fontSize: '1.5rem',
-            '@media (maxWidth: 768px)': {
-              display: 'block'
-            }
+            zIndex: 1001,
+            padding: '0.5rem'
           }}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
@@ -144,47 +170,53 @@ const Header = () => {
         </button>
         
         {/* Mobile menu */}
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100vh',
-          backgroundColor: 'var(--color-background)',
-          zIndex: 100,
-          transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(-100%)',
-          transition: 'transform 0.3s ease',
-          display: 'none',
-          '@media (maxWidth: 768px)': {
-            display: 'block'
-          }
-        }}>
-          <div style={{ padding: '2.5rem' }}>
-            <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {navigationLinks.map((link, i) => (
-                <motion.li 
-                  key={link.path}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  style={{ fontSize: '1.5rem', fontWeight: '500' }}
-                >
-                  <Link 
-                    to={link.path}
-                    style={{ 
-                      color: location.pathname === link.path ? 'var(--color-primary)' : 'var(--color-text-primary)'
-                    }}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100vh',
+              backgroundColor: 'var(--color-background)',
+              zIndex: 1000,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <div style={{ padding: '2.5rem' }}>
+              <ul style={{ display: 'flex', flexDirection: 'column', gap: '2rem', textAlign: 'center' }}>
+                {navigationLinks.map((link, i) => (
+                  <motion.li 
+                    key={link.path}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    style={{ fontSize: '1.5rem', fontWeight: '500' }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-        </div>
+                    <Link 
+                      to={link.path}
+                      style={{ 
+                        color: location.pathname === link.path ? 'var(--color-primary)' : 'var(--color-text-primary)',
+                        padding: '0.5rem 1rem',
+                      }}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        )}
       </div>
     </header>
   );
 };
 
-export default Header; 
+export default Header;
