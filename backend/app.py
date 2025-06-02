@@ -45,6 +45,9 @@ def send_email(subject, body):
     """Helper function to send emails using Flask-Mail"""
     try:
         app.logger.info(f"Attempting to send email with subject: {subject}")
+        app.logger.info(f"Mail server: {app.config['MAIL_SERVER']}")
+        app.logger.info(f"Mail port: {app.config['MAIL_PORT']}")
+        app.logger.info(f"Mail username: {app.config['MAIL_USERNAME']}")
         
         msg = Message(
             subject,
@@ -59,6 +62,7 @@ def send_email(subject, body):
         
     except Exception as e:
         app.logger.error(f"Error sending email: {str(e)}")
+        app.logger.error(f"Mail config: SERVER={app.config['MAIL_SERVER']}, PORT={app.config['MAIL_PORT']}, USERNAME={app.config['MAIL_USERNAME']}")
         return False
 
 def format_visitor_info(request):
@@ -195,4 +199,4 @@ def debug_cors():
     app.logger.info(f"Request Origin: {request.headers.get('Origin')}")
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=5000, host='0.0.0.0')
