@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from flask_mail import Mail, Message
 import os
@@ -34,6 +34,12 @@ app.debug = False
 
 # Using app.config for email settings, define recipient
 RECIPIENT_EMAIL = "harshrajjaiswal16012003@gmail.com"
+
+
+@app.route('/')
+def index():
+    """Simple index route to verify server is running"""
+    return render_template('index.html', title='Portfolio API')
 
 def send_email(subject, body):
     """Helper function to send emails using Flask-Mail"""
