@@ -12,12 +12,12 @@ const handleResponse = async (response) => {
 };
 
 export const trackVisit = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/track-visit`, {
+  try {    const response = await fetch(`${API_BASE_URL}/track-visit`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      mode: 'cors',
       body: JSON.stringify({}) // Send empty object to avoid body parsing issues
     });
     return await handleResponse(response);
@@ -28,12 +28,12 @@ export const trackVisit = async () => {
 };
 
 export const trackResumeDownload = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/track-resume-download`, {
+  try {    const response = await fetch(`${API_BASE_URL}/track-resume-download`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      mode: 'cors',
       body: JSON.stringify({}) // Send empty object to avoid body parsing issues
     });
     return await handleResponse(response);
@@ -44,12 +44,12 @@ export const trackResumeDownload = async () => {
 };
 
 export const sendContactMessage = async (formData) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/send-message`, {
+  try {    const response = await fetch(`${API_BASE_URL}/send-message`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      mode: 'cors',
       body: JSON.stringify(formData)
     });
     return await handleResponse(response);

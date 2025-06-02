@@ -1,14 +1,22 @@
+import nnbuilder1 from '../assets/nnbuilder1.png';
+import nnbuilder2 from '../assets/nnbuilder2.png';
+import nnbuilder3 from '../assets/nnbuilder3.png';
+import flaskforge from '../assets/flaskforge.png';
+import fitcam from '../assets/fitcam.png';
+import autopylot from '../assets/autopylot.png';
+import voicecl from '../assets/voicecl.png';
+
 const projects = [
   {
     "id": 1,
     "title": "NN Builder",
     "description": "A web-based application for building, training, and deploying neural networks with a user-friendly interface. This tool allows users to easily create, customize, and train neural networks for both classification and regression tasks.",
     "longDescription": "NN Builder is a web application that enables users to visually design, train, and test neural network architectures without writing code. It supports dataset uploads, provides AI-powered architecture suggestions, and offers real-time training monitoring. The project aims to make deep learning more accessible to beginners while providing powerful features for experienced users.",
-    "image": "/src/assets/nnbuilder1.png",
+    "image": nnbuilder1,
     "gallery": [
-      // "src/assets/nnbuilder1.png",
-      "src/assets/nnbuilder2.png",
-      "src/assets/nnbuilder3.png",
+      nnbuilder1,
+      nnbuilder2,
+      nnbuilder3,
     ],
     "tags": ["Python", "Flask", "Neural Networks", "Machine Learning", "Web Development", "Deep Learning", "Tensorflow", "Automation"],
     "featured": true,
@@ -27,7 +35,7 @@ const projects = [
     title: "FlaskForge",
     description: "A CLI-based Flask setup tool that automates the creation of Flask directories with basic code and additional features, streamlining the development process.",
     longDescription: "FlaskForge is a command-line tool designed to accelerate Flask application development by automating the project setup process. It generates a well-structured Flask application with configurable features like authentication, database integration, and API endpoints based on user preferences.",
-    image: "src/assets/flaskforge.png",
+    image: flaskforge,
     tags: ["Python", "Flask", "CLI", "Automation", "Web Development","Machine Learning"],
     featured: true,
     codeLink: "https://github.com/harshRaj1601/flaskforge",
@@ -45,7 +53,7 @@ const projects = [
     title: "ClothSize Measurement Tool",
     description: "A Computer Vision project, can measure and predict cloth size of the person",
     longDescription: "ClothSize is an innovative solution that uses computer vision and machine learning to extract precise body measurements from images. This technology helps online shoppers find the right clothing size, reducing returns and improving customer satisfaction in e-commerce.",
-    image: "src/assets/fitcam.png",
+    image: fitcam,
     tags: ["Python", "Computer Vision", "Image Processing", "TensorFlow", "OpenCV", "MediaPipe", "Mathematics"],
     featured: true,
     codeLink: "https://github.com/harshRaj1601/clothmess",
@@ -61,7 +69,7 @@ const projects = [
     id: 4,
     title: "AutoPylot",
     description: "A library that automatically installs all imported libraries in a Python file or an entire project directory, streamlining dependency management.",
-    image: "src/assets/autopylot.png",
+    image: autopylot,
     tags: ["Python", "Automation", "Package Management", "Developer Tools"],
     featured: false,
     codeLink: "https://github.com/harshRaj1601/autopylot",
@@ -78,7 +86,7 @@ const projects = [
     title: "VoiceCL",
     description: "A voice cloning tool that generates audio for input text in any person's voice using advanced machine learning techniques.",
     longDescription: "VoiceCL is a state-of-the-art voice cloning system that uses deep learning to synthesize natural-sounding speech that mimics a target speaker's voice. With just a short audio sample, the system can generate unlimited new speech in the same voice, enabling applications in accessibility, content creation, and personalized user experiences.",
-    image: "src/assets/voicecl.png",
+    image: voicecl,
     tags: ["Python", "Machine Learning", "Voice Synthesis", "Audio Processing", "PyTorch"],
     featured: true,
     codeLink: "",
@@ -151,4 +159,4 @@ const projects = [
   }
 ];
 
-export default projects; 
+export default projects;
