@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiDownload, FiArrowRight, FiBriefcase, FiBook, FiCode } from 'react-icons/fi';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import { trackResumeDownload } from '../../services/tracking';
 
 const Resume = () => {
   const [activeTab, setActiveTab] = useState('experience');
@@ -178,8 +179,11 @@ const Resume = () => {
             }}
           >
             <a 
-              href="/src/assets/harshrajjaiswal16012003.pdf" 
+              href="/src/assets/harshrajjaiswalcv2025.pdf" 
               download
+              onClick={async (e) => {
+                await trackResumeDownload();
+              }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -529,4 +533,4 @@ const Resume = () => {
   );
 };
 
-export default Resume; 
+export default Resume;

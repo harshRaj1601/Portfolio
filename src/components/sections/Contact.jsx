@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiSend, FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import { sendContactMessage } from '../../services/tracking';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -21,27 +22,33 @@ const Contact = () => {
     }));
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Simulate form submission
     setFormStatus('submitting');
-    
-    setTimeout(() => {
-      // Simulate successful form submission
-      setFormStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
+
+    try {
+      const response = await sendContactMessage(formData);
       
-      // Reset status after a delay
-      setTimeout(() => {
-        setFormStatus(null);
-      }, 5000);
-    }, 1500);
+      if (response.success) {
+        setFormStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        setFormStatus('error');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setFormStatus('error');
+    }
+
+    // Reset status after delay
+    setTimeout(() => {
+      setFormStatus(null);
+    }, 5000);
   };
   
   // Animation variants
@@ -457,4 +464,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

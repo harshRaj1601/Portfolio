@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import logoImage from './assets/logow.png';
+import { trackVisit } from './services/tracking';
 
 // Layout components
 import Header from './components/layout/Header';
@@ -47,6 +48,9 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Track visit
+    trackVisit();
+    
     // Simulate loading
     const timer = setTimeout(() => {
       setLoading(false);
