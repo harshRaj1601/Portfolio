@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 import requests
+import pytz
 
 # Load environment variables
 load_dotenv()
@@ -95,7 +96,7 @@ def get_ip_details(ip):
 def format_visitor_info(request):
     """Helper function to format visitor information"""
     try:
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        timestamp = datetime.now(tz=pytz.timezone("Asia/Kolkata")).strftime("%Y-%m-%d %H:%M:%S")
         ip = request.headers.get('X-Forwarded-For', '').split(',')[0] or request.remote_addr or 'Unknown'
         user_agent = request.headers.get('User-Agent', 'Unknown')
         referrer = request.headers.get('Referer', 'Direct visit')
