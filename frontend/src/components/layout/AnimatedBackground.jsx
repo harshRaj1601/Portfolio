@@ -2,8 +2,8 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import './AnimatedBackground.css';
 
 const AnimatedBackground = () => {
-  const text = 'Harsh Jaiswal';
-  const numberOfElements = 10;
+  const text = ["Harsh Jaiswal", "AI Enthusiast", "Python Developer"];
+  const numberOfElements = 15;
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMoving, setIsMoving] = useState(false);
   const containerRef = useRef(null);
@@ -77,7 +77,7 @@ const AnimatedBackground = () => {
             '--initial-y': `${y}px`,
           }}
         >
-          {text}
+          {text[Math.floor(Math.random() * text.length)]}
         </span>
       );
     });

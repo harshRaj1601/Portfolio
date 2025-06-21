@@ -4,6 +4,7 @@ from flask_mail import Mail, Message
 import os
 from datetime import datetime
 from dotenv import load_dotenv
+import requests
 
 # Load environment variables
 load_dotenv()
@@ -69,34 +70,101 @@ def send_email(subject, body, is_html=False):
         app.logger.error(f"Mail config: SERVER={app.config['MAIL_SERVER']}, PORT={app.config['MAIL_PORT']}, USERNAME={app.config['MAIL_USERNAME']}")
         return False
 
+def get_ip_details(ip):
+    """Get detailed information about an IP address"""
+    try:
+        response = requests.get(f'http://ip-api.com/json/{ip}')
+        if response.status_code == 200:
+            data = response.json()
+            if data['status'] == 'success':
+                return {
+                    'ip': ip,
+                    'city': data.get('city', 'Unknown'),
+                    'region': data.get('regionName', 'Unknown'),
+                    'country': data.get('country', 'Unknown'),
+                    'isp': data.get('isp', 'Unknown'),
+                    'timezone': data.get('timezone', 'Unknown'),
+                    'lat': data.get('lat', 0),
+                    'lon': data.get('lon', 0),
+                    'map_url': f"https://maps.googleapis.com/maps/api/staticmap?center={data.get('lat', 0)},{data.get('lon', 0)}&zoom=12&size=400x200&markers=color:red%7C{data.get('lat', 0)},{data.get('lon', 0)}&key={os.getenv('GOOGLE_MAPS_API_KEY', '')}"
+                }
+    except Exception as e:
+        app.logger.error(f"Error getting IP details: {str(e)}")
+    return None
+
 def format_visitor_info(request):
     """Helper function to format visitor information"""
     try:
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        ip = request.remote_addr or 'Unknown'
+        ip = request.headers.get('X-Forwarded-For', '').split(',')[0] or request.remote_addr or 'Unknown'
         user_agent = request.headers.get('User-Agent', 'Unknown')
         referrer = request.headers.get('Referer', 'Direct visit')
-        x_forwarded_for = request.headers.get('X-Forwarded-For')
         
-        # Try to get the real IP if behind a proxy
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0]
+        ip_details = get_ip_details(ip)
+        if ip_details:
+            return {
+                'timestamp': timestamp,
+                'ip_info': ip_details,
+                'user_agent': user_agent,
+                'referrer': referrer
+            }
         
-        return f"""
-Timestamp: {timestamp}
-IP Address: {ip}
-User Agent: {user_agent}
-Referrer: {referrer}
-"""
+        return {
+            'timestamp': timestamp,
+            'ip': ip,
+            'user_agent': user_agent,
+            'referrer': referrer
+        }
     except Exception as e:
         app.logger.error(f"Error formatting visitor info: {str(e)}")
-        return f"""
-Timestamp: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-Error: Could not collect complete visitor information
-"""
+        return {
+            'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'error': 'Could not collect complete visitor information'
+        }
 
 def get_visit_email_template(visitor_info):
     """Generate HTML template for visit notification emails"""
+    has_ip_details = 'ip_info' in visitor_info
+    ip_info = visitor_info.get('ip_info', {})
+    
+    ip_details_html = ""
+    if has_ip_details:
+        ip_details_html = f"""
+            <div class="info-section">
+                <h3>Location Details</h3>
+                <table class="details-table">
+                    <tr>
+                        <td><strong>City:</strong></td>
+                        <td>{ip_info['city']}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Region:</strong></td>
+                        <td>{ip_info['region']}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Country:</strong></td>
+                        <td>{ip_info['country']}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ISP:</strong></td>
+                        <td>{ip_info['isp']}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Timezone:</strong></td>
+                        <td>{ip_info['timezone']}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IP Address:</strong></td>
+                        <td>{ip_info['ip']}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="map-section">
+                <h3>Visitor Location</h3>
+                <img src="{ip_info['map_url']}" alt="Visitor location map" style="width: 100%; max-width: 400px; height: auto; border-radius: 5px;">
+            </div>
+        """
+
     return f'''
     <!DOCTYPE html>
     <html>
@@ -108,6 +176,12 @@ def get_visit_email_template(visitor_info):
             .content {{ background-color: #f8f9fa; padding: 20px; border-radius: 0 0 5px 5px; }}
             .footer {{ text-align: center; margin-top: 20px; font-size: 12px; color: #666; }}
             .info-block {{ background-color: white; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #2563eb; }}
+            .info-section {{ margin: 20px 0; }}
+            .details-table {{ width: 100%; border-collapse: collapse; margin: 10px 0; }}
+            .details-table td {{ padding: 8px; border-bottom: 1px solid #eee; }}
+            .details-table td:first-child {{ width: 120px; color: #666; }}
+            .map-section {{ margin: 20px 0; text-align: center; }}
+            h3 {{ color: #2563eb; margin-bottom: 10px; }}
         </style>
     </head>
     <body>
@@ -117,9 +191,24 @@ def get_visit_email_template(visitor_info):
             </div>
             <div class="content">
                 <p>Someone just visited your portfolio website!</p>
-                <div class="info-block">
-                    {visitor_info.replace(chr(10), '<br>')}
+                <div class="info-section">
+                    <h3>Visit Details</h3>
+                    <table class="details-table">
+                        <tr>
+                            <td><strong>Time:</strong></td>
+                            <td>{visitor_info['timestamp']}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Referrer:</strong></td>
+                            <td>{visitor_info['referrer']}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Browser:</strong></td>
+                            <td>{visitor_info['user_agent']}</td>
+                        </tr>
+                    </table>
                 </div>
+                {ip_details_html}
             </div>
             <div class="footer">
                 <p>This is an automated notification from your Portfolio Website</p>

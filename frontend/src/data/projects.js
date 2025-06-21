@@ -5,6 +5,7 @@ import flaskforge from '../assets/flaskforge.png';
 import fitcam from '../assets/fitcam.png';
 import autopylot from '../assets/autopylot.png';
 import voicecl from '../assets/voicecl.png';
+import dochat from '../assets/dochat.png';
 
 const projects = [
   {
@@ -67,12 +68,13 @@ const projects = [
   },
   {
     id: 4,
-    title: "AutoPylot",
+    title: "AutoPyPack",
     description: "A library that automatically installs all imported libraries in a Python file or an entire project directory, streamlining dependency management.",
     image: autopylot,
     tags: ["Python", "Automation", "Package Management", "Developer Tools"],
     featured: false,
-    codeLink: "https://github.com/harshRaj1601/autopylot",
+    codeLink: "https://github.com/harshRaj1601/AutoPyPack",
+    demoLink: "https://pypi.org/project/AutoPyPack/",
     features: [
       "Automatic detection of imports in Python files",
       "Smart version resolution to avoid conflicts",
@@ -122,8 +124,7 @@ const projects = [
     image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     tags: ["Python", "Computer Vision", "Safety Systems", "TensorFlow", "Alert System"],
     featured: false,
-    demoLink: "https://poseguard.com",
-    codeLink: "https://github.com/harshraj1601/poseguard",
+    codeLink: "",
     features: [
       "Real-time driver pose estimation",
       "Distraction detection",
@@ -155,6 +156,24 @@ const projects = [
       "Quantitative analysis of disease progression",
       "Integration with hospital information systems",
       "Mask Generation using UNET model"
+    ],
+  },
+  {
+    id: 9,
+    title: "DoChat",
+    description: "A Chatroom Application that allows users to create and join chat rooms, send messages, and share files in real-time.",
+    longDescription: "DoChat is a real-time chat application that enables users to create and join chat rooms, send messages, and share files seamlessly. Built with Flask and Socket.IO, it provides a responsive and interactive user experience, making it easy for users to communicate and collaborate in real-time.",
+    image: dochat,
+    tags: ["Python", "Flask", "Socket.IO", "Web Development", "Real-time Communication"],
+    featured: false,
+    demoLink: "",
+    codeLink: "https://github.com/harshRaj1601/DoChat",
+    features: [
+      "Real-time messaging with WebSocket support",
+      "User authentication and session management",
+      "File sharing capabilities",
+      "Chat room creation and management",
+      "Responsive design for desktop and mobile devices"
     ],
   }
 ];
