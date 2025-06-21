@@ -129,6 +129,10 @@ def get_visit_email_template(visitor_info):
     
     ip_details_html = ""
     if has_ip_details:
+        lat = ip_info['lat']
+        lon = ip_info['lon']
+        map_url = ip_info['map_url']
+        google_maps_link = f"https://www.google.com/maps/search/?api=1&query={lat},{lon}"
         ip_details_html = f"""
             <div class="info-section">
                 <h3>Location Details</h3>
@@ -161,7 +165,9 @@ def get_visit_email_template(visitor_info):
             </div>
             <div class="map-section">
                 <h3>Visitor Location</h3>
-                <img src="{ip_info['map_url']}" alt="Visitor location map" style="width: 100%; max-width: 400px; height: auto; border-radius: 5px;">
+                <a href="{google_maps_link}" target="_blank">
+                    <img src="{map_url}" alt="Visitor location map" style="width: 100%; max-width: 400px; height: auto; border-radius: 5px;">
+                </a>
             </div>
         """
 
@@ -212,6 +218,7 @@ def get_visit_email_template(visitor_info):
             </div>
             <div class="footer">
                 <p>This is an automated notification from your Portfolio Website</p>
+                <p>&copy; {datetime.now().year} Harsh Jaiswal. All rights reserved.</p>
             </div>
         </div>
     </body>
@@ -246,6 +253,7 @@ def get_resume_download_template(visitor_info):
             </div>
             <div class="footer">
                 <p>This is an automated notification from your Portfolio Website</p>
+                <p>&copy; {datetime.now().year} Harsh Jaiswal. All rights reserved.</p>
             </div>
         </div>
     </body>
